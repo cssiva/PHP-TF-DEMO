@@ -1,0 +1,33 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      php: 7.4
+      mysql: 5.7
+  pre_build:
+    commands:
+      - echo "Starting build"
+  build:
+    commands:
+      - echo "Build started on `date`"
+      # Install MySQL client for executing database scripts
+      - apt-get update -y
+      - apt-get install mysql-client -y
+
+      # Connect to your MySQL database and execute schema setup script
+      - mysql -h <DB_HOST> -u <DB_USERNAME> -p<DB_PASSWORD> <DB_NAME> < schema.sql
+      # Replace <DB_HOST>, <DB_USERNAME>, <DB_PASSWORD>, <DB_NAME> with your actual database connection details.
+
+      # Any other build steps can go here, such as installing dependencies using Composer:
+      # - composer install
+  post_build:
+    commands:
+      - echo "Build completed on `date`"
+artifacts:
+  files:
+    - '**/*'
+cache:
+  paths:
+    - 'vendor/**/*'
+    - 'node_modules/**/*'
