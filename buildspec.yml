@@ -16,7 +16,7 @@ phases:
       - apt-get install mysql-client -y
 
       # Connect to your MySQL database and execute schema setup script
-      - mysql -h <DB_HOST> -u <DB_USERNAME> -p<DB_PASSWORD> <DB_NAME> < schema.sql
+      - mysql -h localhost -u root -p password myshop < schema.sql
       # Replace <DB_HOST>, <DB_USERNAME>, <DB_PASSWORD>, <DB_NAME> with your actual database connection details.
 
       # Any other build steps can go here, such as installing dependencies using Composer:
